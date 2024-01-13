@@ -71,6 +71,7 @@ div *{
   font-size: 30px;
   cursor: pointer;
   z-index: 1;
+  text-align: center;
 }
 
 .gamecell:hover {
