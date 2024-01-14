@@ -108,3 +108,9 @@ ul li span {
 ul li span:hover {
   background: #edeef0;
 }
+
+@media only screen and (max-width:567px){
+  input {
+    width: 100%;
+  } 
+}
