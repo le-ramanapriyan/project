@@ -63,7 +63,7 @@ img{
 }
 
 /* styles */
-body {
+html, body {
     overflow-x: hidden;
 }
 
@@ -470,6 +470,9 @@ input:focus,textarea:focus {
 /* media queries */
 
 @media only screen and (max-width:1000px){
+    html, body {
+    overflow-x: hidden;
+    }
     .wwa-content {
         flex-direction: column;
     }
@@ -517,6 +520,9 @@ input:focus,textarea:focus {
 }
 
 @media only screen and (max-width:600px){
+    html, body {
+    overflow-x: hidden;
+    }
     .nav-links{
         position: absolute;
         flex-direction: column;
