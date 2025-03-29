@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Specials</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        header {
+            background-color: #ff6f61;
+            color: white;
+            padding: 20px;
+            font-size: 1.5em;
+        }
+
+        /* Main Content */
+        main {
+            margin: 30px auto;
+            max-width: 600px;
+        }
+
+        /* Tiles Section */
+        .tiles {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tile {
+            display: inline-block;
+            padding: 15px 25px;
+            background: #ffcc5c;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .tile:hover {
+            background: #ffb347;
+            transform: scale(1.1);
+        }
+
+        /* Content Display */
+        #content {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to Our Restaurant</h1>
+        <p>Click on the tiles to explore.</p>
+    </header>
+
+    <main>
+        <div class="tiles">
+            <a href="#" id="menu-link" class="tile" role="button" aria-label="View Menu">🍽️ Menu</a>
+            <a href="#" id="specials-link" class="tile" role="button" aria-label="View Specials">⭐ Specials</a>
+            <a href="#" id="map-link" class="tile" role="button" aria-label="View Random Location">🗺️ Map</a>
+        </div>
+
+        <div id="content" class="content-area"></div>
+    </main>
+
+    <script>
+        (function (global) {
+            var dc = {}; // Define a local dc object
+
+            // Predefined Menu Items (Sorted)
+            var menuItems = [
+                { name: "BBQ Ribs", price: 16.99 },
+                { name: "Beef Steak", price: 18.99 },
+                { name: "Butter Chicken", price: 13.99 },
+                { name: "Caesar Salad", price: 8.99 },
+                { name: "Cheese Pizza", price: 9.99 },
+                { name: "Chicken Biryani", price: 12.99 },
+                { name: "Chocolate Lava Cake", price: 6.99 },
+                { name: "Espresso", price: 3.99 },
+                { name: "Fish Tacos", price: 11.99 },
+                { name: "French Onion Soup", price: 7.99 },
+                { name: "Grilled Salmon", price: 15.99 },
+                { name: "Ice Cream Sundae", price: 5.99 },
+                { name: "Lamb Chops", price: 19.99 },
+                { name: "Mango Smoothie", price: 4.99 },
+                { name: "Mushroom Risotto", price: 14.99 },
+                { name: "Shrimp Pad Thai", price: 14.49 },
+                { name: "Spaghetti Bolognese", price: 13.99 },
+                { name: "Sushi Platter", price: 21.99 },
+                { name: "Tandoori Paneer", price: 12.49 },
+                { name: "Vegetable Curry", price: 10.99 }
+            ].sort((a, b) => a.name.localeCompare(b.name));
+
+            // Predefined Specials (Sorted)
+            var specials = [
+                { name: "BBQ Ribs & Cornbread", price: 20.99 },
+                { name: "Biryani & Butter Chicken Combo", price: 18.49 },
+                { name: "Grilled Salmon & Salad", price: 19.99 },
+                { name: "Pizza & Garlic Bread Combo", price: 15.99 },
+                { name: "Steak & Fries Combo", price: 22.99 }
+            ].sort((a, b) => a.name.localeCompare(b.name));
+
+            // Function to load menu items
+            dc.loadMenuItems = function (event) {
+                event.preventDefault();
+                var content = `<h2>Menu Items</h2>`;
+                menuItems.forEach(item => {
+                    content += `<p>${item.name} - $${item.price.toFixed(2)}</p>`;
+                });
+                document.getElementById("content").innerHTML = content;
+            };
+
+            // Function to load specials
+            dc.loadSpecials = function (event) {
+                event.preventDefault();
+                var content = `<h2>Today's Specials</h2>`;
+                specials.forEach(item => {
+                    content += `<p>${item.name} - $${item.price.toFixed(2)}</p>`;
+                });
+                document.getElementById("content").innerHTML = content;
+            };
+
+            // Function to display a random location
+            dc.loadRandomLocation = function (event) {
+                event.preventDefault();
+                var locations = [
+                    "New York, USA", "Los Angeles, USA", "Toronto, Canada", 
+                    "London, UK", "Paris, France", "Tokyo, Japan", 
+                    "Sydney, Australia", "Dubai, UAE", "Singapore, Singapore", 
+                    "Rome, Italy", "Bangkok, Thailand", "Berlin, Germany"
+                ];
+                var randomLocation = locations[Math.floor(Math.random() * locations.length)];
+                document.getElementById("content").innerHTML = `<h2>Random Location: ${randomLocation}</h2>`;
+            };
+
+            // Ensure this runs when the page loads
+            document.addEventListener("DOMContentLoaded", function () {
+                document.getElementById("menu-link").addEventListener("click", dc.loadMenuItems);
+                document.getElementById("specials-link").addEventListener("click", dc.loadSpecials);
+                document.getElementById("map-link").addEventListener("click", dc.loadRandomLocation);
+            });
+
+            global.$dc = dc; // Expose dc globally
+        })(window);
+    </script>
+
+</body>
+</html>
