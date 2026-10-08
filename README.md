@@ -6,7 +6,7 @@ Personal projects by **RAMANAPRIYAN M R V** ([le-ramanapriyan](https://github.co
 
 | Folder | Description |
 |--------|-------------|
-| [png-to-webp](./png-to-webp) | PNG → WebP CLI with hard size budgets (100KB WebP / 150KB PNG) |
+| [png-to-webp](./png-to-webp) | Browser WebP compressor (GitHub Pages) + optional Python CLI |
 
 ## Apps
 

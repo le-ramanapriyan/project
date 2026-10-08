@@ -1,73 +1,57 @@
 # png-to-webp
 
-Personal PNG → WebP CLI with hard size budgets.
+Browser + CLI tool to convert images to WebP.
 
 **Author:** RAMANAPRIYAN M R V ([le-ramanapriyan](https://github.com/le-ramanapriyan))
 
-Part of [le-ramanapriyan/project](https://github.com/le-ramanapriyan/project).
+## Web app (GitHub Pages)
 
-## Budgets (defaults)
+HTML / CSS / JS compressor — runs in your browser. Files never upload to a server.
 
-| Format | Max size |
-|--------|----------|
-| WebP   | 100 KB   |
-| PNG    | 150 KB   |
+**Live path (after Pages is enabled):**  
+https://le-ramanapriyan.github.io/project/png-to-webp/
 
-## Features
+### Features
 
-- Prefers Google **`cwebp`** when a working binary is on PATH; falls back to **Pillow**
-- Tries **lossless** WebP first if it fits under the budget (disable with `--no-lossless-try`)
-- Lossy path starts at quality **100** and binary-searches down to the highest quality that fits
-- Auto-optimizes source PNG when over 150 KB
-- Fails instead of shipping oversized files
-- Single-file and batch folder modes
-- `--dry-run` report only
+- Drop **files** or choose a **folder**
+- Compression types:
+  - **Preset** — High (~92%) / Medium (~75%) / Low (~50%)
+  - **Percentage** — quality slider 1–100%
+  - **Size based** — target max KB (binary-searches highest quality that fits)
+- Download one file or **all as ZIP**
+- Keeps original dimensions; alpha preserved when the browser supports it
 
-## Install
+### Enable GitHub Pages
+
+1. Open [repo Settings → Pages](https://github.com/le-ramanapriyan/project/settings/pages)
+2. Source: **Deploy from a branch**
+3. Branch: `main` → folder `/ (root)` → Save
+4. Wait a minute, then open:  
+   `https://le-ramanapriyan.github.io/project/png-to-webp/`
+
+### Local preview
+
+```bash
+cd png-to-webp
+python3 -m http.server 8080
+# open http://localhost:8080
+```
+
+---
+
+## CLI (optional, Python)
+
+Hard budgets: WebP ≤ 100 KB, PNG ≤ 150 KB.
 
 ```bash
 cd png-to-webp
 python3 -m pip install -e .
-```
-
-If `png2webp` is not found after install, either add your user scripts dir to `PATH` (often `~/Library/Python/3.x/bin` on macOS) or run:
-
-```bash
-python3 -m png_to_webp.cli --input ./hero.png --output ./hero.webp
-```
-
-Requires Python 3.10+ and Pillow (installed automatically).
-
-Optional: install a working [cwebp](https://developers.google.com/speed/webp/docs/cwebp) for the reference encoder. If `cwebp` is broken/missing, Pillow is used automatically.
-
-## Usage
-
-```bash
-# single file
 png2webp --input ./hero.png --output ./hero.webp
-
-# same folder, default name hero.webp
-png2webp --input ./hero.png
-
-# batch
-png2webp --input ./pngs --outdir ./webps
-
-# dry run
-png2webp --input ./hero.png --dry-run
-
-# custom budgets
-png2webp --input ./hero.png --webp-max-kb 100 --png-max-kb 150
-
-# force lossy-only (skip lossless try)
-png2webp --input ./hero.png --no-lossless-try
+# or
+python3 -m png_to_webp.cli --input ./pngs --outdir ./webps
 ```
 
-## Policy
-
-- Keep original dimensions (no resize unless you ask for that feature later)
-- Preserve alpha (RGBA)
-- Never ship a file over its format cap
-- Prefer highest quality that still fits
+Prefers `cwebp` when available; otherwise Pillow. See `src/png_to_webp/`.
 
 ## License
 
